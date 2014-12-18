@@ -1,9 +1,10 @@
 package org.cricinfo.app;
 
-import java.util.List;
+import static org.cricinfo.app.data.DataGenerator.batsmen;
+
+import java.util.Comparator;
 
 import org.cricinfo.app.data.DataGenerator;
-import static org.cricinfo.app.data.DataGenerator.batsmen;
 
 /**
  * 
@@ -21,7 +22,10 @@ public class App {
 	}
 
 	private void getPlayerWithMostRuns() {
-		batsmen.stream()
-			   .forEach(System.out::println);
+		String batsman = batsmen.stream()
+								.max(Comparator.comparing(player -> player.getRuns()))
+								.map(player -> player.getName())
+								.get();
+		System.out.println("Most runs by : " + batsman);
 	}
 }
