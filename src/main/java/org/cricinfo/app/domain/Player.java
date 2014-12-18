@@ -4,21 +4,21 @@ package org.cricinfo.app.domain;
  * 
  * @author jeevan
  * @date 18-Dec-2014
- * @purpose 
+ * @purpose
  *
  */
 public class Player {
 	private String name;
 	private String span;
-	private int matches;
-	private int innings;
-	private int notOuts;
-	private int runs;
+	private Integer matches;
+	private Integer innings;
+	private Integer notOuts;
+	private Integer runs;
 	private String highest;
-	private float average;
-	private int centuries;
-	private int fifties;
-	private int ducks;
+	private Float average;
+	private Integer centuries;
+	private Integer fifties;
+	private Integer ducks;
 	private String team;
 
 	public String getName() {
@@ -37,35 +37,35 @@ public class Player {
 		this.span = span;
 	}
 
-	public int getMatches() {
+	public Integer getMatches() {
 		return matches;
 	}
 
-	public void setMatches(int matches) {
+	public void setMatches(Integer matches) {
 		this.matches = matches;
 	}
 
-	public int getInnings() {
+	public Integer getInnings() {
 		return innings;
 	}
 
-	public void setInnings(int innings) {
+	public void setInnings(Integer innings) {
 		this.innings = innings;
 	}
 
-	public int getNotOuts() {
+	public Integer getNotOuts() {
 		return notOuts;
 	}
 
-	public void setNotOuts(int notOuts) {
+	public void setNotOuts(Integer notOuts) {
 		this.notOuts = notOuts;
 	}
 
-	public int getRuns() {
+	public Integer getRuns() {
 		return runs;
 	}
 
-	public void setRuns(int runs) {
+	public void setRuns(Integer runs) {
 		this.runs = runs;
 	}
 
@@ -77,35 +77,35 @@ public class Player {
 		this.highest = highest;
 	}
 
-	public float getAverage() {
+	public Float getAverage() {
 		return average;
 	}
 
-	public void setAverage(float average) {
+	public void setAverage(Float average) {
 		this.average = average;
 	}
 
-	public int getCenturies() {
+	public Integer getCenturies() {
 		return centuries;
 	}
 
-	public void setCenturies(int centuries) {
+	public void setCenturies(Integer centuries) {
 		this.centuries = centuries;
 	}
 
-	public int getFifties() {
+	public Integer getFifties() {
 		return fifties;
 	}
 
-	public void setFifties(int fifties) {
+	public void setFifties(Integer fifties) {
 		this.fifties = fifties;
 	}
 
-	public int getDucks() {
+	public Integer getDucks() {
 		return ducks;
 	}
 
-	public void setDucks(int ducks) {
+	public void setDucks(Integer ducks) {
 		this.ducks = ducks;
 	}
 
