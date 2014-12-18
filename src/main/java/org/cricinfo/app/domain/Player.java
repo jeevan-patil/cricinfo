@@ -1,5 +1,12 @@
 package org.cricinfo.app.domain;
 
+/**
+ * 
+ * @author jeevan
+ * @date 18-Dec-2014
+ * @purpose 
+ *
+ */
 public class Player {
 	private String name;
 	private String span;
