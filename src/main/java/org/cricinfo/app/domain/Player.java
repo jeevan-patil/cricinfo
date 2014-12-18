@@ -119,7 +119,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player [name=" + name + ", team=" + team + "]";
+		return "Player [name=" + name + "]";
 	}
 
 }

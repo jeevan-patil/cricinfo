@@ -1,13 +1,16 @@
 package org.cricinfo.app;
 
+import static java.lang.System.out;
 import static org.cricinfo.app.data.DataGenerator.batsmen;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.cricinfo.app.data.DataGenerator;
+import org.cricinfo.app.domain.Player;
 
 /**
  * 
@@ -22,15 +25,16 @@ public class App {
 
 		App app = new App();
 		app.getPlayerWithMostRuns();
-		System.out.println(app.runsMoreThan(10000));
-		System.out.println(app.mostRunGetterByTeam("India"));
+		out.println(app.runsMoreThan(10000));
+		out.println(app.mostRunGetterByTeam("India"));
+		out.println(app.mostRunsOrderByTeam());
 	}
 
 	private void getPlayerWithMostRuns() {
 		String batsman = batsmen.stream()
 				.max(Comparator.comparing(player -> player.getRuns()))
 				.map(player -> player.getName()).get();
-		System.out.println("Most runs by : " + batsman);
+		out.println("Most runs by : " + batsman);
 	}
 
 	private List<String> runsMoreThan(int runs) {
@@ -44,17 +48,15 @@ public class App {
 		String playerName = batsmen.stream()
 				.filter(player -> (player.getTeam().equals(team)))
 				.max(Comparator.comparing(player -> player.getRuns()))
-				.map(player -> player.getName())
-				.get();
+				.map(player -> player.getName()).get();
 		return playerName;
 	}
 
-	private void mostRunsOrderByTeam() {
-		Map<String, String> map = batsmen
-				.stream()
-				.sorted((p1, p2) -> p2.getRuns().compareTo(p1.getRuns()))
-				.limit(1)
-				.collect(Collectors.toMap(player -> player.getTeam(), player -> player.getName()));
-		System.out.println(map);
+	private Map<String, Optional<Player>> mostRunsOrderByTeam() {
+		Map<String, Optional<Player>> map = batsmen.stream().collect(
+				Collectors.groupingBy(player -> player.getTeam(), Collectors
+						.maxBy(Comparator.comparing(player -> ((Player) player)
+								.getRuns()))));
+		return map;
 	}
 }
