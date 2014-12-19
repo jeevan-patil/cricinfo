@@ -31,12 +31,8 @@ public class DataGenerator {
 			CSVReader reader = new CSVReader(new InputStreamReader(stream, "UTF-8"));
 			List<String[]> content = reader.readAll();
 
-			String[] row = null;
-
 			int cnt = 0;
-			for (Object object : content) {
-				row = (String[]) object;
-
+			for (String[] row : content) {
 				if(cnt != 0) {
 					Player player = new Player();
 					player.setName(row[0]);
