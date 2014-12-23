@@ -22,14 +22,14 @@ Now you want to see how many processes of Clementine application are running cur
     
    For example consider the following code snippet. We are creating an integer list and creating stream out of it. The operations performed on list are filter, map and collect. 
 
-   ```List<Integer> greaterThan3 = Arrays.asList(3, 4, 5, 7, 1, 2, 9, 8, 44, 4, 6, 2, 3, 1, 0)
+	List<Integer> greaterThan3 = Arrays.asList(3, 4, 5, 7, 1, 2, 9, 8, 44, 4, 6, 2, 3, 1, 0)
 				.stream()
 				.filter(num -> num > 3)
 				.map(num -> num * 2)
 				.collect(Collectors.toList());
-		System.out.println(greaterThan3);```
+		System.out.println(greaterThan3);
 
 * Here, filter accepts a Predicate which in turn returns a boolean value. That means we are checking if an integer is greater than 3 or not. This is a intermediate operation.
- * map function converts a value from one form to another. It returns a stream consisting of the results of applying the given function to the elements of this stream. In this case we are multiplying an integer by 2. This is a intermediate operation.
+* map function converts a value from one form to another. It returns a stream consisting of the results of applying the given function to the elements of this stream. In this case we are multiplying an integer by 2. This is a intermediate operation.
 * collect operation Performs a mutable reduction operation on the elements of this stream using a Collector. In above example we are collecting resultant elements in the list. This is a terminal operation.
 
