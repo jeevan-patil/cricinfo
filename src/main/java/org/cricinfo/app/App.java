@@ -3,6 +3,7 @@ package org.cricinfo.app;
 import static java.lang.System.out;
 import static org.cricinfo.app.data.DataGenerator.batsmen;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,13 @@ public class App {
 		out.println(app.runsMoreThan(10000));
 		out.println(app.mostRunGetterByTeam("India"));
 		out.println(app.mostRunsOrderByTeam());
+		
+		List<Integer> greaterThan3 = Arrays.asList(3, 4, 5, 7, 1, 2, 9, 8, 44, 4, 6, 2, 3, 1, 0)
+				.stream()
+				.filter(num -> num > 3)
+				.map(num -> num * 2)
+				.collect(Collectors.toList());
+		System.out.println(greaterThan3);
 	}
 
 	private void getPlayerWithMostRuns() {
