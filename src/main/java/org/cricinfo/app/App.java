@@ -55,7 +55,8 @@ public class App {
 	private Map<String, Optional<Player>> mostRunsOrderByTeam() {
 		Map<String, Optional<Player>> map = batsmen.stream().collect(
 				Collectors.groupingBy(player -> player.getTeam(), Collectors
-						.maxBy(Comparator.comparing(player -> ((Player) player).getRuns()))));
+						.maxBy(Comparator.comparing(player -> ((Player) player)
+								.getRuns()))));
 		return map;
 	}
 }
