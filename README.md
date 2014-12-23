@@ -33,3 +33,11 @@ Now you want to see how many processes of Clementine application are running cur
 * map function converts a value from one form to another. It returns a stream consisting of the results of applying the given function to the elements of this stream. In this case we are multiplying an integer by 2. This is a intermediate operation.
 * collect operation Performs a mutable reduction operation on the elements of this stream using a Collector. In above example we are collecting resultant elements in the list. This is a terminal operation.
 
+List of intermediate methods / operations that can performed on a stream: 
+* distinct - Removes duplicate elements
+* flatMap - Converts a stream into another stream. Newly generated stream will be forwarded ahead to perform operations thereafter.
+* reduce - Combines multiple input elements and returns single output value.
+* sorted - As name suggests, it is used to sort elements in natural order. Comparator is used for custom ordering.
+
+There are many more such intermediate operations at our disposal. Visit [Oracle](http://www.oracle.com/technetwork/articles/java/ma14-java-se-8-streams-2177646.html) site to know more about Streams in Java 8.
+
