@@ -1,11 +1,9 @@
 package org.cricinfo.app.data;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +15,13 @@ import au.com.bytecode.opencsv.CSVReader;
  * 
  * @author jeevan
  * @date 18-Dec-2014
- * @purpose 
+ * @purpose
  *
  */
 public class DataGenerator {
 
 	public static List<Player> batsmen = new ArrayList<Player>();
-	
+
 	public void readBattingRecords() {
 		InputStream stream = null;
 		try {
@@ -31,32 +29,12 @@ public class DataGenerator {
 			CSVReader reader = new CSVReader(new InputStreamReader(stream, "UTF-8"));
 			List<String[]> content = reader.readAll();
 
-			int cnt = 0;
-			for (String[] row : content) {
-				if(cnt != 0) {
-					Player player = new Player();
-					player.setName(row[0]);
-					player.setSpan(row[1]);
-					player.setMatches(Integer.valueOf(row[2].replace("*", "")));
-					player.setInnings(Integer.valueOf(row[3]));
-					player.setNotOuts(Integer.valueOf(row[4]));
-					player.setRuns(Integer.valueOf(row[5]));
-					player.setHighest(row[6]);
-					player.setAverage(Float.valueOf(row[7]));
-					player.setCenturies(Integer.valueOf(row[8]));
-					player.setFifties(Integer.valueOf(row[9]));
-					player.setDucks(Integer.valueOf(row[10]));
-					player.setTeam(row[11]);
-					batsmen.add(player);
-				}
-				++cnt;
-			}
+			content.stream().skip(1).forEach(data -> {
+				batsmen.add(buildPlayer(data));
+			});
+
 			reader.close();
-		} catch (FileNotFoundException fnf) {
-			fnf.printStackTrace();
-		} catch (UnsupportedEncodingException uex) {
-			uex.printStackTrace();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (stream != null) {
@@ -66,5 +44,22 @@ public class DataGenerator {
 				}
 			}
 		}
+	}
+
+	private static Player buildPlayer(String[] data) {
+		Player player = new Player();
+		player.setName(data[0]);
+		player.setSpan(data[1]);
+		player.setMatches(Integer.valueOf(data[2].replace("*", "")));
+		player.setInnings(Integer.valueOf(data[3]));
+		player.setNotOuts(Integer.valueOf(data[4]));
+		player.setRuns(Integer.valueOf(data[5]));
+		player.setHighest(data[6]);
+		player.setAverage(Float.valueOf(data[7]));
+		player.setCenturies(Integer.valueOf(data[8]));
+		player.setFifties(Integer.valueOf(data[9]));
+		player.setDucks(Integer.valueOf(data[10]));
+		player.setTeam(data[11]);
+		return player;
 	}
 }
