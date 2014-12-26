@@ -7,7 +7,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.cricinfo.app.data.DataGenerator;
 import org.cricinfo.app.domain.Player;
@@ -63,13 +65,18 @@ public class App {
 		return map;
 	}
 
-	private List<String> playersWithLongestTenure(int limit) {
-		Comparator<Player> comparator = Comparator.comparing(player -> -(player.getSpanTo() - player.getSpanFrom()));
-		List<String> batsmen = players.stream()
-				.sorted(comparator)
-				.limit(limit)
-				.map(player -> player.getName())
-				.collect(Collectors.toList());
-		return batsmen;
+	/**
+	 * In this method we are creating Supplier object of Stream. We can use this Supplier Stream multiple times.
+	 * Ordinary Stream can only be used once.
+	 */
+	private Map<String, Integer> playersWithLongestTenure(int limit) {
+		Comparator<Player> comparator = Comparator.comparing(player -> (player.getSpanTo() - player.getSpanFrom()));
+		Supplier<Stream<Player>> supp = () -> players.stream()
+				.sorted(comparator.reversed())
+				.limit(limit);
+
+		Map<String, Integer> dataMap = supp.get()
+				.collect(Collectors.toMap(player -> ((Player) player).getName(), player -> (((Player) player).getSpanTo() - ((Player) player).getSpanFrom())));
+		return dataMap;
 	}
 }
