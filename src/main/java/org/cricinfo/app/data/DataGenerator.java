@@ -20,7 +20,7 @@ import au.com.bytecode.opencsv.CSVReader;
  */
 public class DataGenerator {
 
-	public static List<Player> batsmen = new ArrayList<Player>();
+	public static List<Player> players = new ArrayList<Player>();
 
 	public void readBattingRecords() {
 		InputStream stream = null;
@@ -30,7 +30,7 @@ public class DataGenerator {
 			List<String[]> content = reader.readAll();
 
 			content.stream().skip(1).forEach(data -> {
-				batsmen.add(buildPlayer(data));
+				players.add(buildPlayer(data));
 			});
 
 			reader.close();
@@ -49,17 +49,18 @@ public class DataGenerator {
 	private static Player buildPlayer(String[] data) {
 		Player player = new Player();
 		player.setName(data[0]);
-		player.setSpan(data[1]);
-		player.setMatches(Integer.valueOf(data[2].replace("*", "")));
-		player.setInnings(Integer.valueOf(data[3]));
-		player.setNotOuts(Integer.valueOf(data[4]));
-		player.setRuns(Integer.valueOf(data[5]));
-		player.setHighest(data[6]);
-		player.setAverage(Float.valueOf(data[7]));
-		player.setCenturies(Integer.valueOf(data[8]));
-		player.setFifties(Integer.valueOf(data[9]));
-		player.setDucks(Integer.valueOf(data[10]));
-		player.setTeam(data[11]);
+		player.setSpanFrom(Integer.valueOf(data[1]));
+		player.setSpanTo(Integer.valueOf(data[2]));
+		player.setMatches(Integer.valueOf(data[3].replace("*", "")));
+		player.setInnings(Integer.valueOf(data[4]));
+		player.setNotOuts(Integer.valueOf(data[5]));
+		player.setRuns(Integer.valueOf(data[6]));
+		player.setHighest(data[7]);
+		player.setAverage(Float.valueOf(data[8]));
+		player.setCenturies(Integer.valueOf(data[9]));
+		player.setFifties(Integer.valueOf(data[10]));
+		player.setDucks(Integer.valueOf(data[11]));
+		player.setTeam(data[12]);
 		return player;
 	}
 }

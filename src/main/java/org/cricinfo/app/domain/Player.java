@@ -9,7 +9,8 @@ package org.cricinfo.app.domain;
  */
 public class Player {
 	private String name;
-	private String span;
+	private Integer spanFrom;
+	private Integer spanTo;
 	private Integer matches;
 	private Integer innings;
 	private Integer notOuts;
@@ -29,12 +30,20 @@ public class Player {
 		this.name = name;
 	}
 
-	public String getSpan() {
-		return span;
+	public Integer getSpanFrom() {
+		return spanFrom;
 	}
 
-	public void setSpan(String span) {
-		this.span = span;
+	public void setSpanFrom(Integer spanFrom) {
+		this.spanFrom = spanFrom;
+	}
+
+	public Integer getSpanTo() {
+		return spanTo;
+	}
+
+	public void setSpanTo(Integer spanTo) {
+		this.spanTo = spanTo;
 	}
 
 	public Integer getMatches() {

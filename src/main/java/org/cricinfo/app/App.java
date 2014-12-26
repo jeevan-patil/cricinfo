@@ -1,7 +1,7 @@
 package org.cricinfo.app;
 
 import static java.lang.System.out;
-import static org.cricinfo.app.data.DataGenerator.batsmen;
+import static org.cricinfo.app.data.DataGenerator.players;
 
 import java.util.Comparator;
 import java.util.List;
@@ -28,24 +28,27 @@ public class App {
 		out.println(app.runsMoreThan(10000));
 		out.println(app.mostRunGetterByTeam("India"));
 		out.println(app.mostRunsOrderByTeam());
+
+		// get top N number of players with longest tenure
+		out.println(app.playersWithLongestTenure(5));
 	}
 
 	private void getPlayerWithMostRuns() {
-		String batsman = batsmen.stream()
+		String batsman = players.stream()
 				.max(Comparator.comparing(player -> player.getRuns()))
 				.map(player -> player.getName()).get();
 		out.println("Most runs by : " + batsman);
 	}
 
 	private List<String> runsMoreThan(int runs) {
-		List<String> players = batsmen.stream()
+		List<String> playersList = players.stream()
 				.filter(player -> (player.getRuns() > runs))
 				.map(player -> player.getName()).collect(Collectors.toList());
-		return players;
+		return playersList;
 	}
 
 	private String mostRunGetterByTeam(String team) {
-		String playerName = batsmen.stream()
+		String playerName = players.stream()
 				.filter(player -> (player.getTeam().equals(team)))
 				.max(Comparator.comparing(player -> player.getRuns()))
 				.map(player -> player.getName()).get();
@@ -53,10 +56,20 @@ public class App {
 	}
 
 	private Map<String, Optional<Player>> mostRunsOrderByTeam() {
-		Map<String, Optional<Player>> map = batsmen.stream().collect(
+		Map<String, Optional<Player>> map = players.stream().collect(
 				Collectors.groupingBy(player -> player.getTeam(), Collectors
 						.maxBy(Comparator.comparing(player -> ((Player) player)
 								.getRuns()))));
 		return map;
+	}
+
+	private List<String> playersWithLongestTenure(int limit) {
+		Comparator<Player> comparator = Comparator.comparing(player -> -(player.getSpanTo() - player.getSpanFrom()));
+		List<String> batsmen = players.stream()
+				.sorted(comparator)
+				.limit(limit)
+				.map(player -> player.getName())
+				.collect(Collectors.toList());
+		return batsmen;
 	}
 }
