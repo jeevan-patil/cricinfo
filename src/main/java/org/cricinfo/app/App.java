@@ -3,12 +3,15 @@ package org.cricinfo.app;
 import static java.lang.System.out;
 import static org.cricinfo.app.data.DataGenerator.players;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.cricinfo.app.data.DataGenerator;
@@ -33,6 +36,23 @@ public class App {
 
 		// get top N number of players with longest tenure
 		out.println(app.playersWithLongestTenure(5));
+		app.mostMatchesPlayedPerTeam();
+	}
+
+	private void mostMatchesPlayedPerTeam() {
+		Comparator<Player> comparator = Comparator.comparing(player -> player.getRuns());
+		Map<String, List<Player>> maxMatchesPerTeam = players.stream()
+											.map(player -> player.getTeam())
+											.distinct()
+											.collect(Collectors.toMap(team -> team, 
+														team -> players.stream()
+																.filter(player -> (player.getTeam().equals(team)))
+																.sorted(comparator.reversed())
+																.limit(1)
+																.collect(Collectors.toList())));
+		
+		System.out.println(maxMatchesPerTeam);
+		
 	}
 
 	private void getPlayerWithMostRuns() {
