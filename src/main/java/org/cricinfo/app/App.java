@@ -3,15 +3,12 @@ package org.cricinfo.app;
 import static java.lang.System.out;
 import static org.cricinfo.app.data.DataGenerator.players;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.cricinfo.app.data.DataGenerator;
